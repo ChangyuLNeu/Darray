@@ -9,5 +9,5 @@ setup(
     url="https://github.com/ChangyuLNeu/Darray",
     license='MIT',
     python_requires='>=3',
-    install_requires = ['math', 'numpy', 'io', 'numbers', 'random'],
+    install_requires = ['numpy', 'io', 'numbers', 'random'],
 )
