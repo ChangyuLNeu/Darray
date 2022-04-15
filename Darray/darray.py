@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mar 28
-
-@author: Changyu Liu, Zihan Zhao, Yishui Tian, Jie Ji, Jiaran Kang 
-"""
 import io  
 import numbers
 import numpy as np
