@@ -1,7 +1,9 @@
 # Darray
 ## Introduction
 The Darray is a 2-dimensional data structure which is used for data preprocessing. It is inspired by Dataframe in Pandas
+
 It is built by a two-levels nested(嵌套的) list(as list of lists). Every column is stored in a inner list and all of columns are store in a outer list. 
+
 The type of data in Darray is numeric. 
 You can you use Darray to complement following functions:
 1.initialize Darray:by a list or csv file
