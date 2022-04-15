@@ -34,6 +34,9 @@ pip install git+https://github.com/ChangyuLNeu/Darray.git
 ## Usage(example of use)
 1 initialization
 ```
+from darray import *
+
+a = 
 
 ```
 
