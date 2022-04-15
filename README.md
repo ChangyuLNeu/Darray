@@ -8,19 +8,19 @@ The type of data in Darray is numeric.
 
 You can you use Darray to complement following functions:
 
-1.initialize Darray:by a list or csv file
+**1.initialize Darray:by a list or csv file**
 
-2.index and slice Darray; set value
+**2.index and slice Darray; set value**
 
-3.Handle Na and outliers
+**3.Handle Na and outliers**
 
-4.Arrange data by ascending, descending or random order
+**4.Arrange data by ascending, descending or random order**
 
-5.concate data by column and row
+**5.concate data by column and row**
 
-6.summarize statistical information
+**6.summarize statistical information**
 
-7.....other calculation 
+**7.....other calculation **
 
 ## Install
 Use pip to install the package.
@@ -32,7 +32,7 @@ pip install git+https://github.com/ChangyuLNeu/Darray.git
 
 
 ## Usage(example of functions)
-`1.` initialize Darray
+`1.` **initialize Darray**
 ```
 from darray import *
 
@@ -51,7 +51,7 @@ a = Darray.read_csv('test.csv')    #download 'test.csv' from this repository
 print(a)
 ```
 
-`2.`index and slice Darray
+`2.` **index and slice Darray**
 ```
 #index one cell by indexes
 a[1,0]
@@ -69,7 +69,7 @@ a[1:5,:]
 a[1:3,['id', 'age']]
 ```
 
-`3.` Handle Na and outliers
+`3.` **Handle Na and outliers**
 ```
 #count all nan in Darray
 a.countna()
@@ -99,7 +99,7 @@ a.deletena_col()
 a.replace_outliers()         #这里测试会把nan值，按照lower outlier填充掉。是有问题的
 ```
 
-`4.` Arrange data by ascending, descending or random order
+`4.` **Arrange data by ascending, descending or random order**
 ```
 #ascending order(by column index)
 a.order(1,'asc') 
@@ -114,7 +114,7 @@ a.order(1,'dec')
 a.order(1,'random')      
 ```    
 
-`5.` concate data by column and row
+`5.` **concate data by column and row**
 ```
 b = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','sex','no'])
 c = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','gender','no'])
