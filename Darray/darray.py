@@ -169,7 +169,6 @@ class Darray:
         -------
         content : str
             output content.
-
         """
         output = io.StringIO()
         width, length = self.sizeof()
@@ -207,15 +206,14 @@ class Darray:
 
     def concat_rows(self,new_Darry):
         """
-        concat rows of Darray
+        Concat rows of Darray
         Parameters
         ----------
-        row_indx : list
-            list of row indices
-        new_Darry : Darray
-            Darray to be concated
+        new_Darry: Darray
+        
         Returns
-            concated Darray
+        -------
+            A concated Darray
        """
         if len(self.colnames)!=len(new_Darry.colnames):
             raise ValueError('col number is not same')
@@ -239,7 +237,16 @@ class Darray:
         
             
     def merge_cols(self, new_Darry):
+        """
+        Concat columns of Darray
+        Parameters
+        ----------
+        new_Darry: Darray
         
+        Returns
+        -------
+            A concated Darray
+       """
         new_data1= []
         new_list1= []
         for i in range(len(self.data)):
@@ -262,11 +269,9 @@ class Darray:
     
     def replace_outliers(self):
         """
-        replace outliers of Darray
-        Parameters
-        ----------
-        list_elements : list
-            list of elements
+        Replace outliers with Q1+IQR or Q3+IQR
+            replace outliers less than Q1+IQR with Q1+IQR
+            replace outliers more than Q3+IQR with Q+IQR
         """
         for colname in range(len(self.colnames)):
             Q1Q3=q1q3(self.data[colname])

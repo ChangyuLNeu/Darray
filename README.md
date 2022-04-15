@@ -46,7 +46,7 @@ a = Darray(
     colnames = ['id', 'age', 'height', 'weight', 'grade'])
 
 #use a csv file to initialize
-a = Darraty.read_csv('test.csv')    #download 'test.csv' from this repository
+a = Darray.read_csv('test.csv')    #download 'test.csv' from this repository
 
 print(a)
 ```
@@ -57,8 +57,8 @@ print(a)
 a[1,0]
 
 #index by colnames
-a[1,'no']
-a[1,['no', 'name']]
+a[1,'id']
+a[1,['id', 'age']]
 
 #index by boolean
 a[[True, False, False, False, False, False, False, True],0]
@@ -66,12 +66,71 @@ a[[True, False, False, False, False, False, False, True],0]
 #slice Darray
 a[1:5,0:2]
 a[1:5,:]
-a[1:3,['no', 'name']]
+a[1:3,['id', 'age']]
 ```
 
+3.Handle Na and outliers
+```
+#count all nan in Darray
+a.countna()
 
+#count nan by column 
+a.countna_col()
 
+#count nan by row 
+a.countna_row()
 
+#replace nan with a number
+a.fillna(0)
+
+#replace nan with mean of the column
+a.fillna('mean')
+
+#replace nan with median of the column
+a.fillna('median')
+
+#delete rows with nan
+a.deletena()
+
+#delete columns with nan
+a.deletena_col()
+
+#replace outlier use
+a.replace_outliers()         #这里测试会把nan值，按照lower outlier填充掉。是有问题的
+```
+
+4.Arrange data by ascending, descending or random order
+```
+#ascending order(by column index)
+a.order(1,'asc') 
+
+#ascending order(by column name)
+a.order('age','asc') 
+
+#descending order(by column index)
+a.order(1,'dec')        
+
+#random order(by column index)
+a.order(1,'random')      
+```    
+
+5.concate data by column and row
+```
+b = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','sex','no'])
+c = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','gender','no'])
+d = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8],[1,2,3,4,5,6]], colnames=['name','sex','no','age'])
+e = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8],[1,2,3,4,5,6]], colnames=['name','sex','no','age'])
+f = Darray([[1,2,3,4,5,6,7],[2,3,4,5,6,7,8],[3,4,5,6,7,8,9],[1,2,3,4,5,6,7]], colnames=['name','sex','no','age'])
+
+#concate data by row
+e.concat_rows(f) #correct
+b.concat_rows(c) #ValueError: column names are not same
+b.concat_rows(d) #ValueError: amount of columns is not same
+
+#concate data by column
+c.merge_cols(d) #correct
+e.merge_cols(f) #ValueError: rows number are not same
+```
 
 
 
