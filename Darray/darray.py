@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 import io  
 import numbers
 import numpy as np
@@ -647,176 +648,49 @@ class Darray:
             index = self.colnames.index(colname)
             index_list.append(index)
         return index_list
-                        
 
-def read_csv(file_path, header=True):
-    """
-    read data from csv file and use it to initialize a new Darray
+
+    def read_csv(file_path, header=True):
+        """
+        read data from csv file and use it to initialize a new Darray
+        
+        Parameters
+        ----------
+        file_path : str
+            file path of csv file.
+        header : bool, optional
+            Whether use first line of csv file as column names. The default is True.
     
-    Parameters
-    ----------
-    file_path : str
-        file path of csv file.
-    header : bool, optional
-        Whether use first line of csv file as column names. The default is True.
-
-    Returns
-    -------
-    Drray
-        a new Darray from csv
-
-    """
-    list_colnames = None
-    with open(file_path, 'r',) as f1:
-        list_lines = f1.readlines()
-    if header == True:
-        list_colnames = list_lines[0].rstrip().split(',')
-        list_lines = list_lines[1:]
+        Returns
+        -------
+        Drray
+            a new Darray from csv
     
-    length = len(list_lines)
-    width = len(list_lines[0].rstrip().split(','))
-    
-    data = [] 
-    for i in range(width):
-        data.append([None]*length)
-    
-    for row_idx in range(length):
-        row_values_list = list_lines[row_idx].rstrip().split(',')
-        for col_idx in range(width):
-            if row_values_list[col_idx] == '':
-                data[col_idx][row_idx] = np.nan
-            else:
-                data[col_idx][row_idx] = float(row_values_list[col_idx])
-            #print(col_idx,row_idx, row_values_list[col_idx])
-            #print(row_values_list[col_idx])
-            #print(data[col_idx][row_idx]) 
-            #print(data)
-    
-    return Darray(data, list_colnames)
-
-
-  
-
-
-    
-'''
-    def min():Kang
-    def max():Kang
-    def median():Kang
-    def mean():Kang
-    def mode():Ji
-    def variance():Ji
-    def quantiles():Ji
-    def range():Kang
-    
-    def order():Zhao
-    
-    def countna():Zhao
-    def fillna():Zhao
-    def deletena():Zhao
-    def deleteoutliers():Tian
-    
-    def concat():Tian
-    
-'''       
-'''
-if __name__ == "__main__":
-    #initialization
-    #initialize with [[],[]]
-    a = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10]], colnames=['name','sex','no'])
-    print(a)
-    #initial with csv
-    b = read_csv('test.csv')
-    print(b)
-    
-    #test __getitem__():
-    a = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10]], colnames=['name','gender','no'])
-    a[1,0]
-    a[1,0:2]
-    a[1,'no']
-    a[1,['no', 'name']]
-    a[1:3,0]
-    a[1:3,0:2]
-    a[1:3,'no']
-    a[1:3,['no', 'name']]
-    a[[True, False, False, False, False, False, False, True],0]
-    a[[True, False, False, False, False, False, False, True],0:2]
-    a[[True, False, False, False, False, False, False, True],'no']
-    a[[True, False, False, False, False, False, False, True],['no', 'name']]
-    
-    
-    #test __setitem__():
-    a = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10]], colnames=['name','gender','no'])
-    a[1,0] = 100
-    a[1,0:2] = 100
-    a[1,'no']  = 100
-    a[1,['no', 'name']]  = 200
-    a[1:3,0] = 100
-    a[1:3,0:2] = 300
-    a[1:3,'no'] = 400
-    a[1:3,['no', 'name']] = 500
-    a[[True, False, False, False, False, False, False, True],0] = 100
-    a[[True, False, False, False, False, False, False, True],0:2] = 100
-    a[[True, False, False, False, False, False, False, True],'no'] = 600
-    a[[True, False, False, False, False, False, False, True],['no', 'name']] = 700
-    a[[True, False, False, False, False, False, False, True],['no', 'name']] = [[10,10],[10,10]]
-'''
-'''
-a = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10]], colnames=['name','sex','no'])
-b = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10]], colnames=['name','gender','no'])
-c = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10],[1,2,3,4,5,6,7,8]], colnames=['name','sex','no','age'])
-d = Darray([[1,2,3,4,5,6,7,8],[2,3,4,5,6,7,8,9],[3,4,5,6,7,8,9,10],[1,2,3,4,5,6,7,8]], colnames=['name','sex','no','age'])
-e = Darray([[1,2,3,4,5,6,7,8,9],[2,3,4,5,6,7,8,9,9],[3,4,5,6,7,8,9,10,9],[1,2,3,4,5,6,7,8,9]], colnames=['name','sex','no','age'])
-f = Darray([[1,2,3,4,5,6,99,100],[2,100,100,99,98,97,96,95],[3,4,5,6,7,8,9,10]], colnames=['name','gender','no'])
-g = Darray([[1,2,3,4,5,6,99,1],[2,100,100,99,98,97,96,95],[1,50,50,51,52,53,50,100]], colnames=['name','gender','no'])
-h = Darray([[1,2,3,4,5,6,99,99,2,3,4,5,4],[2,100,100,99,98,97,96,95,2,100,100,100,100],[1,1,50,51,52,53,50,50,50,50,50,50,50]], colnames=['name','gender','no'])
-
-#test concat_rows
-a.concat_rows(b) #ValueError: colnames are not same
-a.concat_rows(c) #ValueError: col number is not same
-c.concat_rows(d) #correct
-d.concat_rows(e) #correct
-
-#test merge_cols
-a.merge_cols(b) #correct
-b.merge_cols(c) #correct
-d.merge_cols(e) #ValueError: rows number are not same
-
-#test replace_outliers
-f.replace_outliers()
-g.replace_outliers()
-h.replace_outliers()
-
-'''
-
-'''
-    b = read_csv('check.csv')
-    b.data
-    b
-    print(b.countna())
-    print(b.countna_col())
-    print(b.countna_row())
-    b.order(0,'asc')
-    b.fillna(0)
-    b.deletena()
-    b.deletena_col()
-    b.fillna('mean')
-    b.order(1,'asc')         #ascending order(by column index)
-    b.order(2,'asc')
-    b.order(1,'desc')        #descending order(by column index)
-    b.order(2,'desc')
-    b.order(1,'random')      #random order(by column index)
-    b.order('Lending Interest','asc')      #ascending order (by column name)
-
-'''
-
-
-
-
-
-
-
-
-
-if __name__ == "__main__":
-    b = read_csv('test.csv')
+        """
+        list_colnames = None
+        with open(file_path, 'r',) as f1:
+            list_lines = f1.readlines()
+        if header == True:
+            list_colnames = list_lines[0].rstrip().split(',')
+            list_lines = list_lines[1:]
+        
+        length = len(list_lines)
+        width = len(list_lines[0].rstrip().split(','))
+        
+        data = [] 
+        for i in range(width):
+            data.append([None]*length)
+        
+        for row_idx in range(length):
+            row_values_list = list_lines[row_idx].rstrip().split(',')
+            for col_idx in range(width):
+                if row_values_list[col_idx] == '':
+                    data[col_idx][row_idx] = np.nan
+                else:
+                    data[col_idx][row_idx] = float(row_values_list[col_idx])
+                #print(col_idx,row_idx, row_values_list[col_idx])
+                #print(row_values_list[col_idx])
+                #print(data[col_idx][row_idx]) 
+                #print(data)
+        
+        return Darray(data, list_colnames)                    
