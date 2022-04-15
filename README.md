@@ -8,9 +8,9 @@ The type of data in Darray is numeric.
 
 You can you use Darray to complement following functions:
 
-**1.initialize Darray:by a list or csv file**
+###**1.initialize Darray:by a list or csv file**
 
-**2.index and slice Darray; set value**
+###**2.index and slice Darray; set value**
 
 **3.Handle Na and outliers**
 
