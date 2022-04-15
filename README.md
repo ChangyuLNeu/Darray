@@ -10,7 +10,7 @@ You can you use Darray to complement following functions:
 
 1.initialize Darray:by a list or csv file
 
-2.select data by indexes, slice or name of column and set value
+2.index and slice Darray; set value
 
 3.Handle Na and outliers
 
@@ -32,15 +32,68 @@ pip install git+https://github.com/ChangyuLNeu/Darray.git
 
 
 ## Usage(example of use)
-1 initialization
+1 initialize Darray
 ```
 from darray import *
 
-a = 
+#use a nested list to initialize
+a = Darray(
+    values = [[1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0],
+            [25.0, 21.0, 20.0, 22.0, 24.0, 23.0, 22.0, 21.0, 21.0, 25.0],
+            [177.5, 180.0, 175.0, 170.0, 172.5, 177.8, np.nan, 170.5, 178.5, 181.5],
+            [62.0, 70.0, 72.0, 55.0, 60.5, 72.0, np.nan, 61.0, 150.0, np.nan],
+            [60.0, 70.0, 80.0, -20.0, 95.0, 85.0, np.nan, 70.0, 72.0, 90.0]],
+    colnames = ['id', 'age', 'height', 'weight', 'grade'])
 
+#use a csv file to initialize
+a = Darraty.read_csv('test.csv')    #download 'test.csv' from this repository
+
+print(a)
 ```
 
-2
+2index and slice Darray
+```
+#index one cell by indexes
+a[1,0]
+
+#index by colnames
+a[1,'no']
+a[1,['no', 'name']]
+
+#index by boolean
+a[[True, False, False, False, False, False, False, True],0]
+
+#slice Darray
+a[1:5,0:2]
+a[1:5,:]
+a[1:3,['no', 'name']]
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Authors
 
 

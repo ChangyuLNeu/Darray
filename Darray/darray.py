@@ -29,8 +29,6 @@ class Darray:
             attributes: data, colnames
 
         """
-
-        
         width = len(values)
         length = max([len(col) for col in values])
         
@@ -56,7 +54,7 @@ class Darray:
  
     def __getitem__(self, key):
         """
-        get s subset of Darray
+        Get a subset of Darray
 
         Parameters
         ----------
@@ -159,7 +157,7 @@ class Darray:
         
     def output(self, num_cols=10, num_rows=100):
         """
-        get out put
+        Get output with a format for __str__ and __repr__
         Parameters
         ----------
         num_rows :int , optional
@@ -193,7 +191,7 @@ class Darray:
         
     def sizeof(self):
         """
-        return width and length of the table
+        Return width and length of the Darray
         Returns
         -------
         width: int
@@ -289,13 +287,13 @@ class Darray:
     
     def order(self,col,way):
         """
-        Order the rows according to the numbers in selected column acendingly/decendingly
+        Order the rows according to the numbers in selected column acendingly/decendingly/randomly
         
         Parameters
         ----------
         col : index
             the column where we chose to order by
-        way: asc/dec
+        way: asc/dec/random
             the way to order the numbers
 
 
@@ -315,7 +313,7 @@ class Darray:
                 raise TypeError('wrong column index')
         else:
             raise TypeError('wrong input type')
-        
+                 
         #create a new empty list and an index list
         y = list(range(len(self.data[col])))
         mylist = [[0,0]]
@@ -323,7 +321,7 @@ class Darray:
         while (newlen)-1>0:
            mylist+=[[0,0]]
            newlen-=1
-
+           
         #sort and creat index list
         if way == 'asc':
             new_self = self.fillna(math.inf)
@@ -343,7 +341,15 @@ class Darray:
                 y[i]=mylist[i][1]
         elif way =='random':
             new_self = self
-            y=random.sample(range(len(self.data[col])), len(self.data[col]))
+            numblist = []
+            nplist=[]
+            for i in range(len(new_self.data[col])):
+                if new_self.data[col][i] is not np.nan:
+                    numblist.append(i)
+                else:
+                    nplist.append(i)
+                    
+            y=random.sample(numblist,len(numblist))+nplist
   
         #create an empty list to build darray
         
@@ -373,7 +379,7 @@ class Darray:
                     
         return result
                    
-
+                
     def countna_col(self):
         """
         Count the existence of nan each column you selected
@@ -402,7 +408,7 @@ class Darray:
             na_col.append(num)    
         return na_col
     
-    
+
     def countna_row(self):
         """
         Count the existence of nan for each row 
@@ -452,7 +458,6 @@ class Darray:
         
 
     def fillna(self,number):
-        
         """
         Fill the nan in Darray with the number chosen
         
@@ -468,13 +473,16 @@ class Darray:
 
         """
         width, length = self.sizeof()
-        if type(number) == int:
-            for i in range(width):
-                for j in range(length):
-                    if self.data[i][j] is np.nan:
-                        self.data[i][j]=number
-            
-        elif number == 'median':
+        
+        newwid = width
+        newD=[length*[0]]
+        while newwid-1>0:
+           newD+=[length*[0]]
+           newwid-=1
+        for i in range(width):
+            for j in range(length):
+                newD[i][j] = self.data[i][j]
+        if number == 'median':
             for i in range(width):
                 for j in range(length):
                     if self.data[i][j] is np.nan:
@@ -484,13 +492,18 @@ class Darray:
                 for j in range(length):
                     if self.data[i][j] is np.nan:
                         self.data[i][j]=mean(self.data[i])
+        else:
+            for i in range(width):
+                for j in range(length):
+                    if self.data[i][j] is np.nan:
+                        newD[i][j]=number
+            
         
-        result = Darray(self.data,colnames=self.colnames)
+        result = Darray(newD,colnames=self.colnames)
         return result
     
 
     def deletena(self):
-        
         """
         Delete the rows with nan
         
@@ -570,8 +583,8 @@ class Darray:
                 
                 
         result = Darray(newD,colnames=newcol)
-        return result
-    
+        return result    
+
 
     def set_2d_value(self, index_2d, value_2d):
         if isinstance(value_2d, list):
