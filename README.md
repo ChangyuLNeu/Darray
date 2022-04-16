@@ -11,6 +11,7 @@ You can you use Darray to complement following functions:
 **1.initialize Darray:by a list or csv file**
 
 
+
 **2.index and slice Darray; set value**
 
 **3.Handle Na and outliers**
@@ -21,7 +22,7 @@ You can you use Darray to complement following functions:
 
 **6.summarize statistical information**
 
-**7.....other calculation **
+**7.....other calculation**
 
 ## Install
 Use pip to install the package.
@@ -115,7 +116,7 @@ a.order(1,'dec')
 a.order(1,'random')      
 ```    
 
-`5.` **concate data by column and row**
+`5.` **Concate data by column and row**
 ```
 b = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','sex','no'])
 c = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','gender','no'])
@@ -133,26 +134,40 @@ c.merge_cols(d) #correct
 e.merge_cols(f) #ValueError: rows number are not same
 ```
 
+`6` **Summarize statistical information**
+```
+a.summary()
+```
 
+`7.` **Operations on Darray**
+```
+#add operation with a single number
+b + 1
 
+#add operation with another Darray with the same shape
+d + e
 
+#subtract operation with a single number
+b - 2
 
+#subtract operation with another Darray with the same shape
+d - e
 
+#multiply operation with a single number
+b * 3 
 
+#multiply operation with another Darray with the same shape
+d * e
 
+#division operation with a single number
+b / 2
 
+#division operation with another Darray with the same shape
+d / e
 
-
-
-
-
-
-
-
-
-
-
-
+#calculate sum of each element in a Darray
+b.sum()
+```
 
 ## Authors
 Changyu Liu, Zihan Zhao, Yishui Tian, Jiaran Kang, Jie Ji

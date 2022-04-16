@@ -263,5 +263,19 @@ def q1q3(x):
 
 
 def method(elem):
-    return elem[0] 
+    """
+    A self defined sorthing method that 
+    let sort function sort according to the first element of the list. 
+
+    Parameters
+    ----------
+    elem : LIST
+        The list we are going to sort.
+
+    Returns
+    -------
+    The first element of the list.
+
+    """
+    return elem[0]
     

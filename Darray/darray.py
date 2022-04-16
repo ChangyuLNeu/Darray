@@ -153,7 +153,129 @@ class Darray:
             self.set_2d_value([row_index, col_index], values)
         else:
             raise TypeError('wrong input type')
+
+
+    def __add__(self, other):
+        """
+        Implement '+' opration
+
+        Parameters
+        ----------
+        other : int or float or Darray
+
+        Returns
+        -------
+        result: Darray
+
+        """
+        shape = self.sizeof()
+        if isinstance(other, (int, float)):
+            data = [[other] * shape[1] ] * shape[0]
+            other = Darray(data)
+
+        if isinstance(other, Darray):
+            result = cell_wise_opt(self, other, '+')
+        else:
+            raise TypeError('wrong input type')
         
+        return result
+
+    
+    def __sub__(self, other):
+        """
+        Implement '-' opration
+
+        Parameters
+        ----------
+        other : int or Darray
+
+        Returns
+        -------
+        Darray
+
+        """
+        shape = self.sizeof()
+        if isinstance(other, (int, float)):
+            data = [[other] * shape[1] ] * shape[0]
+            other = Darray(data)
+
+        if isinstance(other, Darray):
+            result = cell_wise_opt(self, other, '-')
+        else:
+            raise TypeError('wrong input type')
+        
+        return result
+    
+    
+    def __mul__(self, other):
+        """
+        Implement '*' opration
+
+        Parameters
+        ----------
+        other : int or Darray
+
+        Returns
+        -------
+        Darray
+
+        """
+        shape = self.sizeof()
+        if isinstance(other, (int, float)):
+            data = [[other] * shape[1] ] * shape[0]
+            other = Darray(data)
+
+        if isinstance(other, Darray):
+            result = cell_wise_opt(self, other, '*')
+        else:
+            raise TypeError('wrong input type')
+        
+        return result
+    
+    
+    def __truediv__(self, other):
+        """
+        Implement '/' opration
+
+        Parameters
+        ----------
+        other : int or Darray
+
+        Returns
+        -------
+        Darray
+
+        """
+        shape = self.sizeof()
+        if isinstance(other, (int, float)):
+            data = [[other] * shape[1] ] * shape[0]
+            other = Darray(data)
+
+        if isinstance(other, Darray):
+            result = cell_wise_opt(self, other, '/')
+        else:
+            raise TypeError('wrong input type')
+        
+        return result
+        
+    
+    def sum(self):
+        """
+        Calulate all sum of all elements in Darray
+
+        Returns
+        -------
+        result: float
+        """
+        shape = self.sizeof()
+        result = 0.0
+        for i in range(shape[0]):
+            for j in range(shape[1]):
+                if self.data[i][j] != np.nan:
+                    result += self.data[i][j]
+        
+        return result
+
         
     def output(self, num_cols=10, num_rows=100):
         """
@@ -181,7 +303,10 @@ class Darray:
         output.write('\n')
         for i in range(length):
             for j in range(width):
-                output.write('{:12.8g}'.format(self.data[j][i]))
+                if isinstance(self.data[j][i], str):
+                    output.write('{:>12s}'.format(self.data[j][i]))
+                else:
+                    output.write('{:12.8g}'.format(self.data[j][i]))
             output.write('\n')
         content = output.getvalue()
         output.close()
@@ -591,7 +716,56 @@ class Darray:
         return result    
 
 
+    def summary(self):
+        """
+        Get the statistics of each column including ['count','count_na','mean','std','min','25%','50%','75%','max','mode']
+
+        Returns
+        -------
+        Darray
+            Statistics of each column.
+
+        """
+        data = [['count','count_na','mean','std','min','25%','50%','75%','max','mode']]
+        colnames = ['',]
+        col_cnt_na = self.countna_col()
+        shape = self.sizeof()
+        col_cnt = shape[0]
+        row_cnt = shape[1]
+        for i in range(len(self.colnames)):
+            colnames.append(self.colnames[i])
+            statistics = []
+            count = row_cnt - col_cnt_na[i]            #calculate count which is not nan in a column
+            count_na = col_cnt_na[i]                   #calculate count which is nan in a column
+            mean_value = mean(self.data[i])            #mean 
+            std_value = variance(self.data[i])**0.5    #std
+            min_value = min(self.data[i])
+            Q1_value = q1q3(self.data[i])[0]           #25% quantile
+            median_value = median(self.data[i])
+            Q3_value = q1q3(self.data[i])[1]           #75% quantile
+            max_value = imax(self.data[i])
+            mode_value = mode_1(self.data[i])          #mode
+            data.append([count, count_na, mean_value, std_value, min_value, Q1_value, median_value, Q3_value, max_value, mode_value])
+        return Darray(data, colnames)
+    
+
     def set_2d_value(self, index_2d, value_2d):
+        """
+        Set values to a subset of Darray
+        Helper function for __setitem__()
+        
+        Parameters
+        ----------
+        index_2d : list
+            index of a subset of Darray.
+        value_2d : Darray
+            values wanna to set to subset of another Darray 
+
+        Returns
+        -------
+        None.
+
+        """
         if isinstance(value_2d, list):
             values = value_2d
         elif isinstance(value_2d, Darray):
@@ -609,6 +783,21 @@ class Darray:
     
     
     def set_single_value(self, index_2d, value):
+        """
+        Set a single value to a Darray 
+
+        Parameters
+        ----------
+        index_2d : list
+            
+        value : int or float
+            value which is wanted to be set to Darray.
+
+        Returns
+        -------
+        None.
+
+        """
         length = len(index_2d[0])
         width = len(index_2d[1])
         
@@ -617,6 +806,22 @@ class Darray:
     
     
     def get_2d_list_size(self, list_2d):
+        """
+        Get length of each level in a 2-level nested list.
+        The inner length is calulated by (min+max)/2
+
+        Parameters
+        ----------
+        list_2d : list
+            a 2-level nested list.
+
+        Returns
+        -------
+        length, width : tuple
+            length: length of inner list
+            width : length of outer list
+
+        """
         width = len(list_2d)
         
         #get length of all lists
@@ -653,6 +858,21 @@ class Darray:
 
     
     def get_true_index(self, list_bool):
+        """
+        Get indexes of list_bool whose value is True
+        helper function for __setitem__() and  __getitem__()
+        
+        Parameters
+        ----------
+        list_bool : list
+            list of boolean.
+
+        Returns
+        -------
+        index_list : list
+            list of indexes of Trues.
+
+        """
         index_list = []
         for i in range(len(list_bool)):
             if list_bool[i] ==True:
@@ -661,6 +881,21 @@ class Darray:
 
 
     def get_colnames_index(self, list_colnames):
+        """
+        Get indexes of list_colnames
+        helper function for __setitem__() and  __getitem__()
+        
+        Parameters
+        ----------
+        list_colnames : list
+            list of column names.
+
+        Returns
+        -------
+        index_list : list
+            list of indexes of column names.
+
+        """
         index_list = []
         for colname in list_colnames:
             index = self.colnames.index(colname)
@@ -712,3 +947,55 @@ class Darray:
                 #print(data)
         
         return Darray(data, list_colnames)                    
+
+
+def cell_wise_opt(darray_1, darray_2, operation):
+    """
+    Calculate the opreation between every cell in darray_1 and darray_2
+    darray_1 and darray_2 should have the same shape.
+
+    Parameters
+    ----------
+    darray_1 : Darray
+        First element in operation
+    darray_2 : Darray
+        Second element in operation
+    operation : str
+        operation should be one of them: '*', '+', '-', '/'
+
+    Returns
+    -------
+    result:Darray
+        The result of operation
+
+    """
+    shape_1 = darray_1.sizeof()
+    shape_2 = darray_2.sizeof()
+    data_1 = darray_1.data
+    data_2 = darray_2.data
+    
+    if shape_1 != shape_2:
+        raise ValueError('darray_1 and darray_2 have different shape')
+    
+    result = []
+    for i in range(shape_1[0]):
+        inner_result = []
+        for j in range(shape_2[1]):
+            if operation == '+':
+                cell_result = data_1[i][j] + data_2[i][j]
+            elif operation == '-':
+                cell_result = data_1[i][j] - data_2[i][j]
+            elif operation == '*':
+                cell_result = data_1[i][j] * data_2[i][j]
+            elif operation == '/':
+                cell_result = data_1[i][j] / data_2[i][j]
+            else:
+                raise ValueError('undefined operation')
+            
+            inner_result.append(cell_result)
+        
+        result.append(inner_result)
+        
+    darray_result = Darray(result, darray_1.colnames)
+    
+    return darray_result
