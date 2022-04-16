@@ -10,19 +10,17 @@ You can you use Darray to complement following functions:
 
 **1.initialize Darray:by a list or csv file**
 
-
-
 **2.index and slice Darray; set value**
 
-**3.Handle Na and outliers**
+**3.handle Na and outliers**
 
-**4.Arrange data by ascending, descending or random order**
+**4.arrange data by ascending, descending or random order**
 
 **5.concate data by column and row**
 
 **6.summarize statistical information**
 
-**7.....other calculation**
+**7.operations on Darray**
 
 ## Install
 Use pip to install the package.
@@ -71,7 +69,7 @@ a[1:5,:]
 a[1:3,['id', 'age']]
 ```
 
-`3.` **Handle Na and outliers**
+`3.` **handle Na and outliers**
 ```
 #count all nan in Darray
 a.countna()
@@ -101,7 +99,7 @@ a.deletena_col()
 a.replace_outliers()         #这里测试会把nan值，按照lower outlier填充掉。是有问题的
 ```
 
-`4.` **Arrange data by ascending, descending or random order**
+`4.` **arrange data by ascending, descending or random order**
 ```
 #ascending order(by column index)
 a.order(1,'asc') 
@@ -116,7 +114,7 @@ a.order(1,'dec')
 a.order(1,'random')      
 ```    
 
-`5.` **Concate data by column and row**
+`5.` **concate data by column and row**
 ```
 b = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','sex','no'])
 c = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','gender','no'])
@@ -134,12 +132,12 @@ c.merge_cols(d) #correct
 e.merge_cols(f) #ValueError: rows number are not same
 ```
 
-`6` **Summarize statistical information**
+`6` **summarize statistical information**
 ```
 a.summary()
 ```
 
-`7.` **Operations on Darray**
+`7.` **operations on Darray**
 ```
 #add operation with a single number
 b + 1
