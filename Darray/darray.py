@@ -384,12 +384,13 @@ class Darray:
                 new_data1.append(new_list2)
             for i,item in enumerate (new_Darry.colnames):
                 new_Darry.colnames[i]=item + '*'
-            self.colnames=self.colnames + new_Darry.colnames
+            new_colnames=self.colnames + new_Darry.colnames
             
         else:
             raise ValueError('rows number are not same')
         
-        return Darray(new_data1, self.colnames)
+        return Darray(new_data1, new_colnames)
+            
             
     
     def replace_outliers(self):
@@ -407,12 +408,13 @@ class Darray:
             outlier_max=Q3+outlier_step
             outlier_min=Q1-outlier_step
             for i in range(len(self.data[colname])):
-                if self.data[colname][i]>outlier_max:
-                    self.data[colname][i]=outlier_max
-                elif outlier_min<self.data[colname][i]<outlier_max:
-                    self.data[colname][i]=self.data[colname][i]
-                else:
-                    self.data[colname][i]=outlier_min  
+                if self.data[colname][i]is not np.nan:
+                    if self.data[colname][i]>outlier_max:
+                        self.data[colname][i]=outlier_max
+                    elif outlier_min<self.data[colname][i]<outlier_max:
+                        self.data[colname][i]=self.data[colname][i]
+                    else:
+                        self.data[colname][i]=outlier_min
     
     
     def order(self,col,way):
@@ -616,12 +618,12 @@ class Darray:
             for i in range(width):
                 for j in range(length):
                     if self.data[i][j] is np.nan:
-                        self.data[i][j]=median(self.data[i])
+                        newD[i][j]=median(self.data[i])
         elif number == 'mean':
             for i in range(width):
                 for j in range(length):
                     if self.data[i][j] is np.nan:
-                        self.data[i][j]=mean(self.data[i])
+                        newD[i][j]=mean(self.data[i])
         else:
             for i in range(width):
                 for j in range(length):
@@ -631,7 +633,6 @@ class Darray:
         
         result = Darray(newD,colnames=self.colnames)
         return result
-    
 
     def deletena(self):
         """
