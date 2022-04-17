@@ -1,26 +1,28 @@
 # Darray
 ## Introduction
-The Darray is a 2-dimensional data structure which is used for data preprocessing. It is inspired by Dataframe in Pandas
+The Darray is a data-frame-like 2-dimensional data structure used for data preprocessing inspired by Dataframe in Pandas with variables as columns and observation as rows.
 
-It is built by a two-level nested list(as a list of lists). Every column is stored in a inner list and all of columns are store in a outer list. 
+It is built by a two-level nested list(i.e.[[inner_list1],[inner_list2],...]). Every column in a table is stored in an inner list and all of columns are stored in an outer list. 
+
+Darray includes two attributes: data and colnames. The attribute 'data' stores the data of varibles as a two-level nested list and the attribute 'colnames' stores the names of variables as a list.
 
 The type of data in Darray is numeric. 
 
 You can you use Darray to complement following functions:
 
-**1.initialize Darray:by a list or csv file**
+**1.Initialize Darray:by a list or csv file**
 
-**2.index and slice Darray; set value**
+**2.Index and slice Darray; set value**
 
-**3.handle Na and outliers**
+**3.Handle Na and outliers**
 
-**4.arrange data by ascending, descending or random order**
+**4.Arrange data by ascending, descending or random order**
 
-**5.concate data by column and row**
+**5.Concat data by columns or rows**
 
-**6.summarize statistical information**
+**6.Summarize statistical information**
 
-**7.operations on Darray**
+**7.Operations on Darray**
 
 ## Install
 Use pip to install the package.
@@ -32,7 +34,7 @@ pip install git+https://github.com/ChangyuLNeu/Darray.git
 
 
 ## Usage(example of functions)
-`1.` **initialize Darray**
+`1.` **Initialize Darray**
 ```
 from darray import *
 
@@ -51,7 +53,7 @@ a = Darray.read_csv('test.csv')    #download 'test.csv' from this repository
 print(a)
 ```
 
-`2.` **index and slice Darray**
+`2.` **Index and slice Darray**
 ```
 #index one cell by indexes
 a[1,0]
@@ -69,7 +71,7 @@ a[1:5,:]
 a[1:3,['id', 'age']]
 ```
 
-`3.` **handle Na and outliers**
+`3.` **Handle Na and outliers**
 ```
 #count all nan in Darray
 a.countna()
@@ -99,7 +101,7 @@ a.deletena_col()
 a.replace_outliers()         #这里测试会把nan值，按照lower outlier填充掉。是有问题的
 ```
 
-`4.` **arrange data by ascending, descending or random order**
+`4.` **Arrange data by ascending, descending or random order**
 ```
 #ascending order(by column index)
 a.order(1,'asc') 
@@ -114,13 +116,13 @@ a.order(1,'dec')
 a.order(1,'random')      
 ```    
 
-`5.` **concate data by column and row**
+`5.` **Concat data by columns or rows**
 ```
-b = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','sex','no'])
-c = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['name','gender','no'])
-d = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8],[1,2,3,4,5,6]], colnames=['name','sex','no','age'])
-e = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8],[1,2,3,4,5,6]], colnames=['name','sex','no','age'])
-f = Darray([[1,2,3,4,5,6,7],[2,3,4,5,6,7,8],[3,4,5,6,7,8,9],[1,2,3,4,5,6,7]], colnames=['name','sex','no','age'])
+b = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['apple','banana','orange'])
+c = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8]], colnames=['apple','peach','orange'])
+d = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8],[1,2,3,4,5,6]], colnames=['apple','banana','orange','pear'])
+e = Darray([[1,2,3,4,5,6],[2,3,4,5,6,7],[3,4,5,6,7,8],[1,2,3,4,5,6]], colnames=['apple','banana','orange','pear'])
+f = Darray([[1,2,3,4,5,6,7],[2,3,4,5,6,7,8],[3,4,5,6,7,8,9],[1,2,3,4,5,6,7]], colnames=['apple','banana','orange','pear'])
 
 #concate data by row
 e.concat_rows(f) #correct
@@ -132,12 +134,12 @@ c.merge_cols(d) #correct
 e.merge_cols(f) #ValueError: rows number are not same
 ```
 
-`6` **summarize statistical information**
+`6` **Summarize statistical information**
 ```
 a.summary()
 ```
 
-`7.` **operations on Darray**
+`7.` **Operations on Darray**
 ```
 #add operation with a single number
 b + 1

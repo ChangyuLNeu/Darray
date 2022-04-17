@@ -6,7 +6,6 @@ Created on Tue Apr 12 16:20:06 2022
 """
 
 import math
-import numpy
 
 
 def median(x):
@@ -173,35 +172,8 @@ def mode_1(x):
     idx=max_index(list(count(x).values()))
     #return the key for the index
     #since the imax() function only returns the minimum index for the maximum, it is not sensitive to ties.
-    return list(count(x).keys())[idx]   
+    return list(count(x).keys())[idx]
 
-
-def mode(x):
-    """
-    improved version of mode_1(x)
-    Calculates and returns the most common value (mode) in an iterable x (sensitive to ties)
-
-    Parameters
-    ----------
-    x : list
-
-    Returns
-    -------
-    find_key[0]: when there is only one mode
-    find_key: when there are more than one modes
-
-    """
-    x=[x_ for x_ in x if x_==x_]
-    #define the max value in the dictionary 
-    max_value=max(list(count(x).values()))
-    #find the key from the value in the dictionary
-    find_key = [key for key, value in count(x).items() if value == max_value]
-    #return the list for the key if there are more than one modes; 
-    #return the first element in the list if there are only one mode.
-    if len(find_key)==1:
-        return find_key[0]
-    else:
-        return find_key
 
 
 def variance(x):
