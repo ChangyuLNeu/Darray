@@ -10,19 +10,19 @@ The type of data in Darray is numeric.
 
 You can you use Darray to complement following functions:
 
-**1.Initialize Darray:by a list or csv file**
+**1. Initialize Darray:by a list or csv file**
 
-**2.Index and slice Darray; set value**
+**2. Index and slice Darray; set value**
 
-**3.Handle Na and outliers**
+**3. Handle Na and outliers**
 
-**4.Arrange data by ascending, descending or random order**
+**4. Arrange data by ascending, descending or random order**
 
-**5.Concat data by columns or rows**
+**5. Concat data by columns or rows**
 
-**6.Summarize statistical information**
+**6. Summarize statistical information**
 
-**7.Operations on Darray**
+**7. Operations on Darray**
 
 ## Install
 Use pip to install the package.
