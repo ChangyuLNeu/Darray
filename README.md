@@ -27,7 +27,13 @@ You can you use Darray to complement following functions:
 ## Install
 Use pip to install the package.
 
-Note:the url is the website of the package on github
+From source(Recommanded)
+```
+git clone https://github.com/ChangyuLNeu/Darray
+cd Darray/
+python setup.py install
+```
+
 ```
 pip install git+https://github.com/ChangyuLNeu/Darray.git
 ```

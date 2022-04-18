@@ -61,19 +61,15 @@ a.countna_row()
 a.fillna(0)
 
 #replace nan with mean of the column
-a = Darray.read_csv('test.csv')
 a.fillna('mean')
 
 #replace nan with median of the column
-a = Darray.read_csv('test.csv')
 a.fillna('median')
 
 #delete rows with nan
-a = Darray.read_csv('test.csv')
 a.deletena()
 
 #delete columns with nan
-a = Darray.read_csv('test.csv')
 a.deletena_col()
 
 #replace outlier use
