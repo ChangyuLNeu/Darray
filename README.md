@@ -24,6 +24,33 @@ You can you use Darray to complement following functions:
 
 **7. Operations on Darray**
 
+This is the structure of our package:
+
+```Shell
+├── Darray
+    ├── Darray
+        ├── __init__.py
+        ├── utils.py
+        ├── darray.py
+           ├── self.data
+           ├── self.colnames
+           ├── __init__()
+           ├── __str__()
+           ├── __getitem__()
+           ├── __setitem__()
+           ├── __add__() etc...
+           ├── order()
+           ├── deletena() etc...
+           ├── concat_rows() etc...
+           ├── summary()
+           ├── ...
+           
+    ├── README.md   
+    ├── setup.py
+    ├── test.csv
+    ├── test.py
+```
+
 ## Install
 Use pip to install the package.
 
