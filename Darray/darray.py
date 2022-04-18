@@ -45,7 +45,7 @@ class Darray:
                 value.extend([None]*diff)
             self.data[i] = value
             
-        print('inin')
+        print('print test')
  
     def __str__(self):
         return self.output()
