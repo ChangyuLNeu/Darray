@@ -1,4 +1,4 @@
-from darray import *
+from Darray.darray import *
 
 #1 initialize Darray
 #use a nested list to initialize
@@ -11,7 +11,7 @@ a = Darray(
     colnames = ['id', 'age', 'height', 'weight', 'grade'])
 
 #use a csv file to initialize
-a = Darray.read_csv('test.csv')    #'test.csv' is from this repository
+a = Darray.read_csv('Darray/test.csv')    #'test.csv' is from this repository
 
 print(a)
 
@@ -47,7 +47,7 @@ print(a)
 
 
 #3.Handle Na and outliers
-a = Darray.read_csv('test.csv')
+a = Darray.read_csv('Darray/test.csv')
 #count all nan in Darray
 a.countna()
 
@@ -76,7 +76,7 @@ a.deletena_col()
 a.replace_outliers()         #这里测试会把nan值，按照lower outlier填充掉。是有问题的
 
 #4.Arrange data by ascending, descending or random order
-a = Darray.read_csv('test.csv')
+a = Darray.read_csv('Darray/test.csv')
 #ascending order(by column index)
 a.order(1,'asc') 
 

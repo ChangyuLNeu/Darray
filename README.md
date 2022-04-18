@@ -27,22 +27,18 @@ You can you use Darray to complement following functions:
 ## Install
 Use pip to install the package.
 
-From source(Recommanded)
+From source
 ```
 git clone https://github.com/ChangyuLNeu/Darray
 cd Darray/
 python setup.py install
 ```
 
-```
-pip install git+https://github.com/ChangyuLNeu/Darray.git
-```
-
 
 ## Usage(example of functions)
 `1.` **Initialize Darray**
 ```
-from darray import *
+from Darray.darray import *
 
 #use a nested list to initialize
 a = Darray(
@@ -54,7 +50,7 @@ a = Darray(
     colnames = ['id', 'age', 'height', 'weight', 'grade'])
 
 #use a csv file to initialize
-a = Darray.read_csv('test.csv')    #download 'test.csv' from this repository
+a = Darray.read_csv('Darray/test.csv')     #download 'test.csv' from this repository
 
 print(a)
 ```
@@ -89,7 +85,7 @@ a[1:3,0:2] = [[110,120],[130,140]]
 `3.` **Handle Na and outliers**
 ```
 #count all nan in Darray
-a = Darray.read_csv('test.csv')
+a = Darray.read_csv('Darray/test.csv') 
 a.countna()
 
 #count nan by column 
@@ -108,7 +104,6 @@ a.fillna('mean')
 a.fillna('median')
 
 #delete rows with nan
-a = Darray.read_csv('test.csv')
 a.deletena()
 
 #delete columns with nan
