@@ -5,7 +5,7 @@ import numbers
 import numpy as np
 import random
 import math
-from utils import * 
+from .utils import * 
 
 
 
