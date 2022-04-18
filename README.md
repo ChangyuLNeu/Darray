@@ -71,9 +71,19 @@ a[1:5,:]
 a[1:3,['id', 'age']]
 ```
 
+**Set value**
+```
+#set value
+a[0,0] = 100
+a[3,'id']  = 200
+a[1:3,0] = 300
+a[1:3,0:2] = [[110,120],[130,140]]
+```
+
 `3.` **Handle Na and outliers**
 ```
 #count all nan in Darray
+a = Darray.read_csv('test.csv')
 a.countna()
 
 #count nan by column 
@@ -92,6 +102,7 @@ a.fillna('mean')
 a.fillna('median')
 
 #delete rows with nan
+a = Darray.read_csv('test.csv')
 a.deletena()
 
 #delete columns with nan
