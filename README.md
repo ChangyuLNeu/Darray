@@ -8,7 +8,7 @@ Darray includes two attributes: data and colnames. The attribute 'data' stores t
 
 The type of data in Darray is numeric. 
 
-You can use Darray to complement following functions:
+You can use Darray to complement the following functions:
 
 **1. Initialize Darray:by a list or csv file**
 
