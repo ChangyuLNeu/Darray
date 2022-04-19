@@ -393,9 +393,9 @@ class Darray:
     
     def replace_outliers(self):
         """
-        Replace outliers with Q1+IQR or Q3+IQR
-            replace outliers less than Q1+IQR with Q1+IQR
-            replace outliers more than Q3+IQR with Q+IQR
+        Replace outliers with Q1-1.5IQR or Q3+1.5IQR
+            replace outliers less than Q1-1.5IQR with Q1-1.5IQR
+            replace outliers more than Q3+1.5IQR with Q3+1.5IQR
         """
         for colname in range(len(self.colnames)):
             Q1Q3=q1q3(self.data[colname])
