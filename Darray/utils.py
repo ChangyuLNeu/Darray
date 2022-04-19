@@ -154,6 +154,7 @@ def max_index(x):
     #if the maximum value appears more than once in the list, this function only returns the minimum index for the value
     return idx
 
+
 def mode_1(x):
     """
     Calculates and returns the most common value (mode)  in an iterable x (not sensitive to ties)
