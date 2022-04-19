@@ -7,7 +7,6 @@ Created on Tue Apr 12 16:20:06 2022
 
 import math
 
-
 def median(x):
     """
     Calculate the median value of an iterable
