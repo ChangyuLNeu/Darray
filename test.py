@@ -73,7 +73,7 @@ a.deletena()
 a.deletena_col()
 
 #replace outlier use
-a.replace_outliers()         #这里测试会把nan值，按照lower outlier填充掉。是有问题的
+a.replace_outliers()         
 
 #4.Arrange data by ascending, descending or random order
 a = Darray.read_csv('Darray/test.csv')
