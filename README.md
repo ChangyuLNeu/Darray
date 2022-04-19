@@ -4,7 +4,7 @@ The Darray is a data-frame-like 2-dimensional data structure used for data prepr
 
 It is built by a two-level nested list(i.e.[[inner_list1],[inner_list2],...]). Every column in a table is stored in an inner list and all of columns are stored in an outer list. 
 
-Darray includes two attributes: data and colnames. The attribute 'data' stores the data of varibles as a two-level nested list and the attribute 'colnames' stores the names of variables as a list.
+Darray includes two attributes: data and colnames. The attribute 'data' stores the data of variables as a two-level nested list and the attribute 'colnames' stores the names of variables as a list.
 
 The type of data in Darray is numeric. 
 
