@@ -8,8 +8,7 @@ import math
 from .utils import * 
 
      
-
-        
+     
 class Darray:
     def __init__(self, values, colnames=None):
         """
